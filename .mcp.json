@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "postgresql://localhost:5432/formento_dev"],
+      "_comment": "Needed for Phase 3 (schema inspection, migration verification) and Phase 0a derived-mode DB-schema extraction (v2). Replace the connection string with the project's actual dev DB URL, or move it to an env var before committing."
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "_comment": "Needed for Phase 0a derived mode (reading an existing repo to extract) and for Phase 5 handoff if the deployed project's repo lives on GitHub. Set GITHUB_TOKEN in your shell env, do not hardcode it here."
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."],
+      "_comment": "Scoped filesystem access for the generated project directory, useful once Formento starts writing actual app code in Phases 2-5."
+    }
+  }
+}
+

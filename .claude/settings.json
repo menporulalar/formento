@@ -1,0 +1,27 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh -c 'f=\"$CLAUDE_TOOL_INPUT_FILE_PATH\"; case \"$f\" in *.prisma) command -v prisma >/dev/null 2>&1 && npx prisma format --schema=\"$f\" || true;; *.ts|*.tsx|*.js|*.jsx) command -v prettier >/dev/null 2>&1 && npx prettier --write \"$f\" || true;; esac'"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh -c 'echo \"$CLAUDE_TOOL_INPUT_COMMAND\" | grep -Eq \"prisma (migrate reset|db push --force-reset)|docker (compose )?down -v|rm -rf .*(node_modules|\\.git)\" && { echo \"[formento-guard] Destructive command blocked — confirm with the user before running this manually.\" >&2; exit 1; } || exit 0'"
+          }
+        ]
+      }
+    ]
+  }
+}
+
