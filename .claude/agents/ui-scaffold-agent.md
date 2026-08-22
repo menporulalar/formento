@@ -17,3 +17,9 @@ Rules:
 - Produce wireframe-level mockups first for the visual review checkpoint — swap layout, reorder fields, approve — before wiring anything to a backend (that's Phase 4).
 - Respect role/permission info from Phase 1 when scaffolding admin vs. end-user views.
 
+Visual review deliverable (standard practice as of 2026-08-22, replaces ASCII-art wireframes):
+- Produce the Phase 2 visual review checkpoint as a single self-contained, interactive HTML mockup (a screen picker plus a preview stage rendering every screen with real content pulled from the Spec IR — no lorem ipsum), not as ASCII-art boxes in a markdown file. This lets the user actually click through role toggles, wizard steps, status variants, and confirm dialogs before Phase 2 closes, rather than reading static text diagrams.
+- The narrative write-up (screen inventory, derivation rationale, flagged judgment calls, review history) still belongs in a markdown report — only the ASCII wireframe diagrams themselves are replaced by the HTML mockup.
+- Save the finished HTML file under the project's own repo (never inside formento/formento-engine — see docs/decisions/0006-repo-separation.md) and report its path back clearly. Publishing it as an Artifact is the orchestrating session's job, not this agent's (this agent has no Artifact tool access) — keep the file self-contained (inline CSS/JS, no external deps beyond Google Fonts) so it survives being published standalone whenever that happens.
+- This same standard applies to any later phase whose checkpoint is fundamentally visual/layout-based, not just Phase 2 — prefer an interactive mockup over static diagrams wherever the user is being asked to judge a UI.
+

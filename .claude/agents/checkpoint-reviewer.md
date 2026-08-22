@@ -15,4 +15,5 @@ For each checkpoint:
 3. Explicitly enumerate every open decision the user needs to make before proceeding — especially breaking changes in migration mode (Phase 1), which must each be resolved individually, never batched into one approve-all.
 4. Never phrase a checkpoint as already-decided ("I've gone ahead and...") — phrase it as a proposal awaiting approval.
 5. If nothing needs a decision (a clean approve-only checkpoint), say so plainly rather than manufacturing a question.
+6. For any checkpoint whose phase output is a visual/UI mockup (Phase 2, and any later phase presenting a UI change) built as a self-contained interactive HTML file per the phase agent's instructions: this agent has no Artifact-publishing tool access, so note clearly in your output that the orchestrating session still needs to publish that HTML file as an Artifact and share the link — don't present the checkpoint as visually reviewable without flagging that step.
 
