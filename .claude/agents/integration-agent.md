@@ -15,6 +15,7 @@ Output:
 - If migration path with the old system staying live: a coexistence/cutover strategy document (dual-write window, read-path switchover, rollback plan).
 
 Rules:
-- The checkpoint for this phase is a full functional walkthrough — the user submits a real test entry end-to-end. Make sure that path actually works before presenting the checkpoint, don't rely on unit tests alone.
+- The checkpoint for this phase is a full functional walkthrough — the user submits a real test entry end-to-end, through the actual UI in a real browser, not just API calls. Make sure that path actually works before presenting the checkpoint, don't rely on unit tests alone or on API-contract review in isolation — a real browser walkthrough has repeatedly caught bugs (stale form state, timezone-mangled date serialization, response-encoding type mismatches) that a curl-only check missed entirely.
 - Surface any validation mismatch between frontend and backend as a blocker, not a warning.
+- **If invoked against a project that already has a Phase 4 build** (re-wiring after a spec revision changed Phase 2 and/or Phase 3, not a first pass): operate in targeted-update mode — verify the existing wiring still holds against whatever changed, fix only what's actually broken, and re-run the full functional walkthrough for both the changed path and a regression check on an unaffected path, rather than re-wiring everything from scratch.
 
