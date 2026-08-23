@@ -6,5 +6,5 @@ Invoke the `integration-agent` subagent to connect Phase 2 frontend forms to the
 
 Before presenting the checkpoint, actually submit a real test entry end-to-end and confirm it works — this phase's checkpoint IS the functional walkthrough.
 
-Invoke `checkpoint-reviewer` to present it. Do not proceed to `/phase5-deploy` until approved.
+Invoke `review-coordinator` to run `integration-reviewer` (which independently checks the walkthrough actually happened, not just that it was claimed) and aggregate findings. Only invoke `checkpoint-reviewer` once no blocking findings remain. Do not proceed to `/phase5-deploy` until approved.
 

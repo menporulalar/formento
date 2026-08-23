@@ -6,5 +6,5 @@ Confirm the UI framework is shadcn/ui + Tailwind (Formento's v1 default per docs
 
 Invoke the `ui-scaffold-agent` subagent with the approved Phase 1 Spec IR to produce wireframe-level form layouts and list/detail/admin views.
 
-When ready, invoke `checkpoint-reviewer` to present the Phase 2 visual review checkpoint (layout/reorder/approve). Do not proceed to `/phase3-backend` until approved.
+When ready, invoke `review-coordinator` to run `design-reviewer` (design critique + accessibility pass) and aggregate findings. Only invoke `checkpoint-reviewer` to present the Phase 2 visual review checkpoint (layout/reorder/approve) once no blocking findings remain. Do not proceed to `/phase3-backend` until approved.
 
