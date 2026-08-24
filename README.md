@@ -1,3 +1,5 @@
+![Formento](banner.svg)
+
 # Formento
 
 **Working name:** Formento
