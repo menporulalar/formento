@@ -1,5 +1,6 @@
 {
   "name": "formento-marketplace",
+  "description": "Self-hosted single-plugin marketplace for Formento — a checkpoint-gated pipeline that rebuilds a form-heavy app from a spec.",
   "owner": {
     "name": "Thiru (Janakiraman Veerappan)",
     "email": "mail.janakiraman.in@gmail.com",
