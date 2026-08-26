@@ -1,0 +1,18 @@
+{
+  "name": "formento-engine",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Formento's own pipeline engine: Spec IR types/validation, checkpoint state machine, and phase compiler logic. See docs (github.com/menporulalar/formento) for the spec, PRD, and build plan this implements.",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0",
+    "zod": "^3.23.0"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "entities": [
+    {
+      "id": "staff",
+      "name": "Staff",
+      "fields": [
+        { "id": "id", "name": "Staff ID", "type": "number", "required": true, "validations": [] },
+        {
+          "id": "departmentId",
+          "name": "Department",
+          "type": "number",
+          "required": true,
+          "validations": [{ "type": "required" }, { "type": "foreignKey", "value": "department" }]
+        }
+      ],
+      "relationships": [
+        {
+          "id": "rel-staff-department",
+          "fromEntity": "staff",
+          "toEntity": "department",
+          "type": "many-to-one",
+          "foreignKeyField": "departmentId",
+          "onDelete": "restrict"
+        }
+      ]
+    },
+    {
+      "id": "department",
+      "name": "Department",
+      "fields": [{ "id": "id", "name": "Department ID", "type": "number", "required": true, "validations": [] }],
+      "relationships": []
+    }
+  ]
+}

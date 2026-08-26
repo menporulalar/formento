@@ -1,0 +1,41 @@
+name: Engine CI
+
+on:
+  pull_request:
+    paths:
+      - "engine/**"
+      - ".github/workflows/engine-ci.yml"
+  push:
+    branches: [main]
+    paths:
+      - "engine/**"
+      - ".github/workflows/engine-ci.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: engine
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: engine/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - name: Check Spec IR FK-field / relationships[] consistency
+        run: |
+          files=$(git ls-files '*spec-ir*.json' -- .)
+          if [ -z "$files" ]; then
+            echo "No tracked *spec-ir*.json files under engine/; nothing to check."
+            exit 0
+          fi
+          status=0
+          for f in $files; do
+            node src/spec-ir/check-fk-relationships.mjs "$f" || status=1
+          done
+          exit $status

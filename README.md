@@ -19,12 +19,12 @@ Formento is an agentic provisioning system that takes minimal input — a templa
 - [`docs/tooling-setup.md`](docs/tooling-setup.md) — the `.claude/` subagents, commands, hooks, and MCP servers set up for building this in Claude Code
 - [`docs/milestone-1-source.md`](docs/milestone-1-source.md) — the confirmed Milestone 1 source project (Practical_Database: raw SQL + procedural PHP), its schema, and known gaps to watch for
 
-## Repo layout (docs/decisions/0006)
+## Repo layout (docs/decisions/0006, updated by 0010)
 
-This repo is **docs and tooling only** — spec, PRD, build plan, decisions, `.claude/`. The actual implementation lives elsewhere:
+This repo holds the spec, PRD, build plan, decisions, `.claude/` tooling, **and** the pipeline implementation:
 
-- **`formento-engine`** (sibling folder, `~/Documents/Product/Nanda-Projects/formento-engine`) — the real TypeScript implementation: Spec IR types/validators, checkpoint state machine, phase compiler logic. Milestone 0 onward lands there, not here.
-- **Generated projects** — each real app Formento builds (starting with the Milestone 1 derived-mode project) lives in its own separate folder/repo, never inside this one or the engine repo.
+- **[`engine/`](engine/)** — the TypeScript implementation: Spec IR types/validators, checkpoint state machine, phase compiler logic. Previously a separate `formento-engine` repo; merged in here 2026-08-24 (docs/decisions/0010) once it became clear the split wasn't earning its keep — `engine/` was still pure scaffold and every real phase execution ran through `.claude/` agents directly, never through compiled engine code. Milestone 0 onward lands under `engine/`, with its own CI (`.github/workflows/engine-ci.yml`).
+- **Generated projects** — each real app Formento builds (starting with the Milestone 1 derived-mode project) lives in its own separate folder/repo, never inside this one.
 
 ## Quick summary
 
