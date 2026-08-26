@@ -27,6 +27,13 @@ As of 2026-08-26 ([docs/decisions/0011](docs/decisions/0011-claude-code-plugin-p
 claude --plugin-dir /path/to/formento
 ```
 
+Or install it from its own self-hosted marketplace ([`.claude-plugin/marketplace.json`](.claude-plugin/marketplace.json)) without cloning:
+
+```bash
+/plugin marketplace add menporulalar/formento
+/plugin install formento@formento-marketplace
+```
+
 Then run `/phase0-intent` (or ask in plain language — "start a new Formento project") to begin. `commands/` gives each phase a literal slash command — the intended way to drive Formento, since phase progression is meant to be deliberate and user-triggered, never auto-started by Claude. `skills/` mirrors the same 8 triggers as a secondary natural-language discovery path. `agents/` holds the 15 phase/reviewer agents they dispatch, and `hooks/hooks.json` carries the format-on-write, Spec IR structural-check, and destructive-command-guard hooks.
 
 ## Repo layout (docs/decisions/0006, updated by 0010 and 0011)
