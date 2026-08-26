@@ -29,7 +29,7 @@ jobs:
       - run: npm test
       - name: Check Spec IR FK-field / relationships[] consistency
         run: |
-          files=$(git ls-files '*spec-ir*.json' -- .)
+          files=$(git ls-files -- '*spec-ir*.json')
           if [ -z "$files" ]; then
             echo "No tracked *spec-ir*.json files under engine/; nothing to check."
             exit 0
