@@ -1,0 +1,13 @@
+{
+  "name": "formento",
+  "version": "0.1.0",
+  "description": "A checkpoint-gated pipeline that rebuilds a form-heavy app from a spec — either from scratch or by pointing at an existing codebase — through six phases (Intent, Schema, UI, Backend, Integration, Deploy), with independent review at every phase and nothing proceeding without explicit approval.",
+  "author": {
+    "name": "Thiru (Janakiraman Veerappan)",
+    "email": "mail.janakiraman.in@gmail.com"
+  },
+  "homepage": "https://github.com/menporulalar/formento",
+  "repository": "https://github.com/menporulalar/formento",
+  "license": "MIT",
+  "keywords": ["codegen", "spec-driven", "pipeline", "checkpoint", "derived-mode", "app-generation"]
+}

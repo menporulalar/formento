@@ -3,7 +3,7 @@
 # Formento
 
 **Working name:** Formento
-**Status:** Requirements & planning — PRD + build plan drafted, pre-development
+**Status:** Milestone 1 shipped — the first real derived-mode project (NASC Practical Claim Portal) has been through the full pipeline: Phase 0 extraction through Phase 4 integration, plus a mid-project spec revision cascade. Packaged as an installable Claude Code plugin as of 2026-08-24.
 **Author:** Thiru (Janakiraman Veerappan)
 
 Formento is an agentic provisioning system that takes minimal input — a template pick, a conversation, or an existing project to reverse-engineer — and produces a fully running, deployable form-heavy application, built through a series of user-gated checkpoints rather than a single autonomous generation pass.
@@ -19,11 +19,22 @@ Formento is an agentic provisioning system that takes minimal input — a templa
 - [`docs/tooling-setup.md`](docs/tooling-setup.md) — the `.claude/` subagents, commands, hooks, and MCP servers set up for building this in Claude Code
 - [`docs/milestone-1-source.md`](docs/milestone-1-source.md) — the confirmed Milestone 1 source project (Practical_Database: raw SQL + procedural PHP), its schema, and known gaps to watch for
 
-## Repo layout (docs/decisions/0006, updated by 0010)
+## Using this as a Claude Code plugin
 
-This repo holds the spec, PRD, build plan, decisions, `.claude/` tooling, **and** the pipeline implementation:
+As of 2026-08-26 ([docs/decisions/0011](docs/decisions/0011-claude-code-plugin-packaging.md)), this repo is itself an installable Claude Code plugin — `agents/`, `commands/`, `skills/`, `hooks/hooks.json`, and `.mcp.json` at repo root (alongside `.claude-plugin/plugin.json`) are the pipeline's actual payload, not just documentation about it. Install it locally to try it:
 
-- **[`engine/`](engine/)** — the TypeScript implementation: Spec IR types/validators, checkpoint state machine, phase compiler logic. Previously a separate `formento-engine` repo; merged in here 2026-08-24 (docs/decisions/0010) once it became clear the split wasn't earning its keep — `engine/` was still pure scaffold and every real phase execution ran through `.claude/` agents directly, never through compiled engine code. Milestone 0 onward lands under `engine/`, with its own CI (`.github/workflows/engine-ci.yml`).
+```bash
+claude --plugin-dir /path/to/formento
+```
+
+Then run `/phase0-intent` (or ask in plain language — "start a new Formento project") to begin. `commands/` gives each phase a literal slash command — the intended way to drive Formento, since phase progression is meant to be deliberate and user-triggered, never auto-started by Claude. `skills/` mirrors the same 8 triggers as a secondary natural-language discovery path. `agents/` holds the 15 phase/reviewer agents they dispatch, and `hooks/hooks.json` carries the format-on-write, Spec IR structural-check, and destructive-command-guard hooks.
+
+## Repo layout (docs/decisions/0006, updated by 0010 and 0011)
+
+This repo holds the spec, PRD, build plan, decisions, the plugin payload (`agents/`, `commands/`, `skills/`, `hooks/`), **and** the pipeline implementation:
+
+- **[`agents/`](agents/), [`commands/`](commands/), [`skills/`](skills/), [`hooks/`](hooks/), `.mcp.json`, `.claude-plugin/plugin.json`** — the installable plugin itself ([docs/decisions/0011](docs/decisions/0011-claude-code-plugin-packaging.md)). Previously lived as project-level `.claude/agents/`, `.claude/commands/`, and `.claude/settings.json`; `.claude/` no longer carries these — see the decision doc for why and how the two differ.
+- **[`engine/`](engine/)** — the TypeScript implementation: Spec IR types/validators, checkpoint state machine, phase compiler logic. Previously a separate `formento-engine` repo; merged in here 2026-08-24 (docs/decisions/0010) once it became clear the split wasn't earning its keep — `engine/` was still pure scaffold and every real phase execution ran through the agent layer directly, never through compiled engine code. Milestone 0 onward lands under `engine/`, with its own CI (`.github/workflows/engine-ci.yml`).
 - **Generated projects** — each real app Formento builds (starting with the Milestone 1 derived-mode project) lives in its own separate folder/repo, never inside this one.
 
 ## Quick summary
